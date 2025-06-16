@@ -1,1 +1,11 @@
 
+# Kesinti sorgulama betiği amacı;
+# Elektrik kesintisi bilgisini ilgili sağlayacının web sitesine gitmeden düzenli olarak çalşıtırılan bir zamanlayıcı ile yakınınızda oluşan kesintilerden haberdar olmakdır.
+# Çalıştırılan dizinde chromedriver.exe uygulamasının olması gerekmektedir.
+# Python yüklü olması gerekmektedir. İnternet üzerinden kolayca indirme sağlayabilirsiniz.
+# SENDER_EMAIL ve RECIPIENT_EMAIL ayarları ile bu kontrollerin eğer filtrelediğiniz adresde bir kesinti oluşacak ise size mail atmasını sağlayabilirsiniz.
+# Bu kesintilerin  log_file_name = "bedas_kesinti_log.txt" log dosyasına yazılmasını sağlayabilirsiniz.
+# KEYWORD_TO_SEARCH = "Kesinti için aranacak kelime örn sokak cadde mahalle vs." bildirim almak istediğiniz özel alan bilgisini buraya ekleyebilirsiniz.
+# Betik İstanbul Avrupa Yakası için düzenlendi diğer noktalar için değişiklikler yapabilirsiniz.
+
+# Sedat Kınaç 

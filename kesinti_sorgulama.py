@@ -248,7 +248,7 @@ def write_to_log(data, log_file="bedas_kesinti_log.txt"):
         f.write("\n")
 
 if __name__ == "__main__":
-    url = "https://www.bedas.com.tr/elektrik-kesintisi-sorgulama?il=%C4%B0STANBUL&ilce=SARIYER" #farklı ilçe seçilebilir.
+    url = "https://www.bedas.com.tr/elektrik-kesintisi-sorgulama?il=%C4%B0STANBUL&ilce=İLCE_SECİN" #farklı ilçe seçilebilir.
     log_file_name = "bedas_kesinti_log.txt"
 
     # E-posta yapılandırma bilgileri - Lütfen bunları kendi bilgilerinizle güncelleyin!
@@ -278,7 +278,7 @@ if __name__ == "__main__":
                 write_to_log(kesinti_data, log_file_name)
                 print("İşlem tamamlandı. 'bedas_kesinti_log.txt' dosyasını kontrol edin.")
             else:
-                print("Sarıyer için aktif bir elektrik kesintisi bulunamadı. Log dosyasına kaydediliyor...")
+                print("Seçilen ilçe için aktif bir elektrik kesintisi bulunamadı. Log dosyasına kaydediliyor...")
                 write_to_log(kesinti_data, log_file_name)
             
             # Log dosyasının içeriğini oku ve belirli kelimeyi içeren satırları filtrele
