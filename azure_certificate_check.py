@@ -4,7 +4,7 @@ import datetime
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from dateutil import parser  # <- Burayı ekle
+from dateutil import parser 
 from email.utils import formataddr
 
 # Azure App bilgileri
@@ -19,7 +19,7 @@ smtp_user = "kinacs@sedatkinac.com"
 smtp_password = "Password"  # Güvenli şekilde alman önerilir
 
 
-# Sabitler
+
 days_until_expiration = 30 # Süre kişiselleştirilebilir.
 include_already_expired = True
 
@@ -110,8 +110,8 @@ for app in apps:
             })
 
     for cert in certs:
-        start_date = parser.isoparse(cert['startDateTime'])   # <--- Burada değişiklik
-        end_date = parser.isoparse(cert['endDateTime'])       # <--- Burada değişiklik
+        start_date = parser.isoparse(cert['startDateTime'])   
+        end_date = parser.isoparse(cert['endDateTime'])      
         cert_name = cert.get('displayName', '')
         remaining_days = (end_date - now).days
 
