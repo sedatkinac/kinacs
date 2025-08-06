@@ -1,0 +1,29 @@
+# Kullanım Amacı;
+#Linux üzerinde düzenli çalışması için oluşturulan uygulamanın servis olarak aktif olması.
+# Burada send.py isimli mail gönderme için oluşturulan betiğin servis olarak aktif edilmesini paylaşacağım.
+
+vi /etc/systemd/system/send.service
+
+[Unit]
+Description=Python Script Send Service
+After=network.target
+
+[Service]
+Type=simple
+User=root # hangi kullanıcı ile çalışmasını gerektiğini bildiriyoruz.
+WorkingDirectory=/home
+ExecStart=/usr/bin/python3 /home/send.py  # çalıştırılacak betiğin tam yolunu ekliyoruz burada.
+Restart=on-failure  # Betik hata verirse yeniden başlat
+
+[Install]
+WantedBy=multi-user.target
+
+:wq! # Kaydet ve çıkış yap
+# Sonrasında sırasıyla 
+
+systemctl daemon-reload
+systemctl enable send.service
+systemctl start send.service
+
+
+
