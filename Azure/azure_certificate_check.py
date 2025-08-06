@@ -1,3 +1,7 @@
+# Betiğin amacı Azure üzerince yer alan App Registrations Sertifika/Secret'ların sürelerini takip etmek.
+# Konuyla ilgili https://www.mshowto.org/microsoft-azure-app-registrations-sertifika-secret-sure-takibi.html buradaki yazımı inceleyebilirsiniz.
+# 
+
 import msal
 import requests
 import datetime
