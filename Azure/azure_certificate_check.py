@@ -15,7 +15,7 @@ tenant_id = "Tenant ID"
 # SMTP bilgileri
 smtp_server = "smtp.outlook.com"
 smtp_port = 587
-smtp_user = "e-mail"
+smtp_user = "kinacs@sedatkinac.com"
 smtp_password = "Password"  # Güvenli şekilde alman önerilir
 
 
