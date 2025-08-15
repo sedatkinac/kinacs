@@ -1,5 +1,5 @@
 takeown /F "Dosya yolunu buraya yazın" /R /D Y /A
-icacls "C:\ProgramData\docker" /setowner "kullanıcı adı" /T /C
+icacls "Dosya yolunu buraya yazın" /setowner "kullanıcı adı" /T /C
 
 <#
  takeown /F → Dosya/klasör sahipliğini alır
