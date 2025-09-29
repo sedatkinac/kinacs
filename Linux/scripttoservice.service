@@ -1,5 +1,5 @@
 # Kullanım Amacı;
-#Linux üzerinde düzenli çalışması için oluşturulan uygulamanın servis olarak aktif olması.
+# Linux üzerinde düzenli çalışması için oluşturulan uygulamanın servis olarak aktif olması.
 # Burada send.py isimli mail gönderme için oluşturulan betiğin servis olarak aktif edilmesini paylaşacağım.
 
 vi /etc/systemd/system/send.service

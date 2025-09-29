@@ -1,4 +1,4 @@
-#Sedat Kınaç
+# Sedat Kınaç
 # Kullanıcılara belirli periyodik aralıklarla şifrelerinin sürelerini değiştirme için hatırlatıcı bir scripttir.
 # Burada kullanıcı SMTP bilgilerini, -SearchBase "OU=UserList,OU=Contoso,DC=contoso,DC=com" bilgilerini ve HTML ksımında mail içerisinde yazacak detayları değiştirebilir.
 # Periyodik süreleri kendinize göre ayarlayabilirsiniz.
