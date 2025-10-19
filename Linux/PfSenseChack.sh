@@ -1,0 +1,85 @@
+#!/bin/sh
+
+# Log dosyasinin yeri
+LOG_FILE="/var/log/systemcheck.log"
+
+# Log dosyasini baslat ve yaz
+echo "Erisim Kesintisi Kontrolu Baslatildi - $(date)" > $LOG_FILE
+echo "===============================================" >> $LOG_FILE
+
+# Sistem Durumu Kontrolu
+echo "Sistem durumu kontrol ediliyor..." >> $LOG_FILE
+uptime >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# Ag Baglantisi Kontrolu (WAN Baglantisi)
+echo "WAN baglantisi kontrol ediliyor..." >> $LOG_FILE
+ping -c 4 8.8.8.8 > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "WAN baglantisi aktif." >> $LOG_FILE
+else
+    echo "WAN baglantisinda problem var! Internet erisimi yok." >> $LOG_FILE
+fi
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# Ag Arayuzlerini Kontrol Et
+echo "Ag arayuzleri kontrol ediliyor..." >> $LOG_FILE
+ifconfig >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# pfSense Servislerinin Durumunu Kontrol Et
+echo "pfSense servisleri kontrol ediliyor..." >> $LOG_FILE
+service -e | grep -i 'running' >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# Sistem Gunluklerini Kontrol Et (son 100 satir)
+echo "Sistem gunlukleri kontrol ediliyor..." >> $LOG_FILE
+tail -n 100 /var/log/system.log >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# Firewall Kurallarini Kontrol Et
+echo "Firewall kurallari kontrol ediliyor..." >> $LOG_FILE
+pfctl -sr >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# RTO (Round Trip Time) Kontrolu (baglanti gecikme sureleri)
+echo "RTO kontrolu (gecikme) yapiliyor..." >> $LOG_FILE
+ping -c 4 PFSenseIP> /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "Yerel ag baglantisi normal." >> $LOG_FILE
+else
+    echo "Yerel ag baglantisinda problem var!" >> $LOG_FILE
+fi
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# DNS Durumunu Kontrol Et
+echo "DNS servisi kontrol ediliyor..." >> $LOG_FILE
+service unbound status >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# Load Average (Sistem Yuku) Kontrolu
+echo "Sistem yuku kontrol ediliyor..." >> $LOG_FILE
+uptime | awk -F'load average: ' '{ print $2 }' >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# Disk Durumunu Kontrol Et
+echo "Disk durumu kontrol ediliyor..." >> $LOG_FILE
+df -h >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# Ag Yonlendirme Tablosu Kontrolu
+echo "Ag yonlendirme tablosu kontrol ediliyor..." >> $LOG_FILE
+netstat -rn >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# Firewall Durumunu Kontrol Et
+echo "Firewall durumunu kontrol ediliyor..." >> $LOG_FILE
+pfctl -s info >> $LOG_FILE
+echo "-----------------------------------------------" >> $LOG_FILE
+
+# Erisim Kesintisi Kaynagini Kontrol Et (log dosyalarini arastir)
+echo "Erisim kesintisinin kaynagini arastiriyoruz..." >> $LOG_FILE
+grep -i "error" /var/log/system.log >> $LOG_FILE
+grep -i "warn" /var/log/system.log >> $LOG_FILE
+echo "===============================================" >> $LOG_FILE
+echo "Kontrol islemi tamamlandi - $(date)" >> $LOG_FILE
