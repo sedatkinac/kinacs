@@ -27,8 +27,8 @@ echo "Ag arayuzleri kontrol ediliyor..." >> $LOG_FILE
 ifconfig >> $LOG_FILE
 echo "-----------------------------------------------" >> $LOG_FILE
 
-# pfSense Servislerinin Durumunu Kontrol Et
-echo "pfSense servisleri kontrol ediliyor..." >> $LOG_FILE
+# Firewall Servislerinin Durumunu Kontrol Et
+echo "Firewall servisleri kontrol ediliyor..." >> $LOG_FILE
 service -e | grep -i 'running' >> $LOG_FILE
 echo "-----------------------------------------------" >> $LOG_FILE
 
